@@ -18,6 +18,7 @@ run: upgrade
 
 build: upgrade
 	python manage.py tailwind build
+	python manage.py collectstatic --noinput
 
 dev:
 	python -m pip install -U -r requirements/development.txt

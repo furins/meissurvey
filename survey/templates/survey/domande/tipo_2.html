@@ -1,28 +1,78 @@
-{% extends 'survey/domande/base.html' %}
-{% load static %}
-{# scelta a 5 valori di gradimento #}
-{% block domanda %}
+{% extends 'survey/domande/base.html' %} {% load static %} {# scelta a 5 valori
+di gradimento #} {% block domanda %}
 <div id="messaggio" class="hidden">
   <p class="text-2xl font-mono">Grazie per il tuo contributo!</p>
 </div>
 <div class="flex flex-row w-full columns-5" id="domanda">
   <input type="hidden" id="risposta" name="risposta" value="2" />
-  <img class="w-[15vw] aspect-square p-2" src="{% static 'img/0.svg' %}" onclick="submit_value(0)"/>
-  <img class="w-[15vw] aspect-square p-2" src="{% static 'img/1.svg' %}" onclick="submit_value(1)"/>
-  <img class="w-[15vw] aspect-square p-2" src="{% static 'img/2.svg' %}" onclick="submit_value(2)"/>
-  <img class="w-[15vw] aspect-square p-2" src="{% static 'img/3.svg' %}" onclick="submit_value(3)"/>
-  <img class="w-[15vw] aspect-square p-2" src="{% static 'img/4.svg' %}" onclick="submit_value(4)"/>
+  <img
+    class="w-[15vw] aspect-square p-2 bottone--animato"
+    src="{% static 'img/0.svg' %}"
+    onclick="submit_value(0)"
+    style="animation-delay: 1000ms"
+  />
+  <img
+    class="w-[15vw] aspect-square p-2 bottone--animato"
+    src="{% static 'img/1.svg' %}"
+    onclick="submit_value(1)"
+    style="animation-delay: 1100ms"
+  />
+  <img
+    class="w-[15vw] aspect-square p-2 bottone--animato"
+    src="{% static 'img/2.svg' %}"
+    onclick="submit_value(2)"
+    style="animation-delay: 1200ms"
+  />
+  <img
+    class="w-[15vw] aspect-square p-2 bottone--animato"
+    src="{% static 'img/3.svg' %}"
+    onclick="submit_value(3)"
+    style="animation-delay: 1300ms"
+  />
+  <img
+    class="w-[15vw] aspect-square p-2 bottone--animato"
+    src="{% static 'img/4.svg' %}"
+    onclick="submit_value(4)"
+    style="animation-delay: 1400ms"
+  />
 </div>
 <script>
-    function submit_value(value){
-        document.getElementById('domanda').classList.add('hidden');
-        document.getElementById('messaggio').classList.remove('hidden');
-        setTimeout(
-          function(){
-              document.getElementById('risposta').value = value;
-              document.getElementById("ratingform").submit();
-            },2000);
-        
+  let domanda_attuale = {{ quesito.order }};
+  let domande_totali = {{manager.get_max_order}};
+  function submit_value(value){
+    if (domanda_attuale === domande_totali) {
+      document.getElementById('domanda').classList.add('hidden');
+      document.getElementById('messaggio').classList.remove('hidden');
+      setTimeout(
+        function(){
+            document.getElementById('risposta').value = value;
+            document.getElementById("ratingform").submit();
+          },2000);
+    } else {
+      document.getElementById('risposta').value = value;
+      document.getElementById("ratingform").submit();
     }
+
+
+
+  }
 </script>
+<style>
+  .bottone--animato {
+    animation: 0.5s ease-in-out 0s 1 FadeIn;
+    animation-fill-mode: forwards;
+    position: relative;
+    opacity: 0;
+  }
+  @keyframes FadeIn {
+    0% {
+      top: -10px;
+      opacity: 0;
+    }
+    100% {
+      top: 0;
+      opacity: 1;
+    }
+  }
+</style>
 {% endblock domanda %}

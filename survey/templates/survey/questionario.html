@@ -2,7 +2,8 @@
 {% block contenuti %}
 <div class="py-8">
 
-        <p class="text-2xl font-mono">{{questionario.introduzione|safe}}</p>
+        <p class="text-2xl font-mono font-bold mt-2 mb-2">{{questionario.introduzione| striptags }}</p>
+        {% if questionario.introduzione %}<hr class="mb-6">{% endif %}
         <form  method="POST" id="ratingform">
               {% csrf_token %}
             <input type="hidden" id="quesito" name="quesito" value="{{quesito.id}}" />
