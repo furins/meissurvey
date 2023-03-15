@@ -1,0 +1,7 @@
+{% block domanda_wrapper %}
+    <h1 class="text-3xl py-4 font-mono">{{quesito.titolo}}</h1>
+
+    <p class="text-lg pb-4 font-mono">{{quesito.introduzione | safe}}</p>
+    {% block domanda %}{% endblock domanda %} 
+    {{quesito.conclusione | safe}} 
+{% endblock domanda_wrapper %}

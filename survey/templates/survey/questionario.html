@@ -1,0 +1,21 @@
+{% extends 'survey/base.html' %}
+{% block contenuti %}
+<div class="py-8">
+
+        <p class="text-2xl font-mono">{{questionario.introduzione|safe}}</p>
+        <form  method="POST" id="ratingform">
+              {% csrf_token %}
+            <input type="hidden" id="quesito" name="quesito" value="{{quesito.id}}" />
+            {% if quesito.tipo == 1 %}
+                {% include 'survey/domande/tipo_1.html' %}
+            {% elif quesito.tipo == 2 %}
+                {% include 'survey/domande/tipo_2.html' %}
+            {% elif quesito.tipo == 3 %}
+                {% include 'survey/domande/tipo_3.html' %}
+            {% else %}
+                <p class="text-lg pb-4 font-mono">Questionario terminato. Premi per iniziarne un altro.</p>
+            {% endif %}
+        </form>
+        <p class="font-mono">{{questionario.conclusione|safe}}</p>
+    </div>
+{% endblock contenuti %}

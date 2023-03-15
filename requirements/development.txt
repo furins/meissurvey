@@ -1,0 +1,2 @@
+django-stubs[compatible-mypy]
+pylint-django

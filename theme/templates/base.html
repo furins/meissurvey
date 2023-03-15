@@ -1,0 +1,29 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Questionari MEIS</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    {% tailwind_css %}
+  </head>
+
+  <body class="bg-white text-black font-serif leading-normal tracking-normal">
+    <div class="container mx-auto p-10">
+      <div class="flex">
+        <div class="flex-none w-50">
+          <img src="{% static 'img/logo_meis.svg' %}" class="w-[10vw]" />
+        </div>
+        <div class="grow"></div>
+        <div class="flex-none w-50">
+          <h1 class="text-xl font-mono">{{questionario.titolo}}</h1>
+        </div>
+      </div>
+
+      {% block contenuti %}
+      <h1 class="text-5xl font-mono">MEIS</h1>
+      {% endblock contenuti %}
+    </div>
+  </body>
+</html>
