@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import environ
 
+gettext = lambda s:s # richiesto da modeltranslation
+
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False),
@@ -43,6 +45,7 @@ ALLOWED_IPS = env('ALLOWED_IPS').split(':')
 
 INSTALLED_APPS = [
     'django_light',
+    'modeltranslation',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -56,13 +59,14 @@ INSTALLED_APPS = [
     'tailwind',
     'django_browser_reload',
     'loguru',
-    
+    'rosetta',
     'survey',
     'theme'
-    
+
 ]
 
 MIDDLEWARE = [
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -125,7 +129,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'it-it'
+LANGUAGE_CODE = 'it'
 
 TIME_ZONE = 'Europe/Rome'
 
@@ -133,12 +137,25 @@ USE_I18N = True
 
 USE_TZ = True
 
+LANGUAGES = (
+    ('it', gettext('Italiano')),
+    ('en', gettext('English'))
+)
+
+LOCALE_PATHS = (
+    BASE_DIR / "rosetta/locale",
+)
+MODELTRANSLATION_DEDFAULT_LANGUAGE='it'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
 STATIC_ROOT = env('STATIC_ROOT')
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -172,3 +189,4 @@ CKEDITOR_CONFIGS = {
 }
 
 TAILWIND_APP_NAME = 'theme'
+ROSETTA_UWSGI_AUTO_RELOAD = True

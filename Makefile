@@ -1,4 +1,4 @@
-.PHONY: run, upgrade, install, check, theme, dev
+.PHONY: run, upgrade, install, check, theme, dev, translate
 
 install:
 	python -m pip install -U -r requirements/production.txt
@@ -22,4 +22,10 @@ build: upgrade
 
 dev:
 	python -m pip install -U -r requirements/development.txt
+	python manage.py tailwind install
 	$(MAKE) install
+
+translate:
+	mkdir -p rosetta/locale/{it,en}/LC_MESSAGES
+	python manage.py makemessages -l en
+	python manage.py makemessages -l it

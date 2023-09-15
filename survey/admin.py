@@ -1,14 +1,15 @@
 from django.contrib import admin
 from .models import Questionario, Quesito, Risposta
 from ordered_model.admin import OrderedModelAdmin
+from modeltranslation.admin import TabbedTranslationAdmin
 
 @admin.register(Questionario)
-class QuestionarioAdmin(admin.ModelAdmin):
+class QuestionarioAdmin(OrderedModelAdmin, TabbedTranslationAdmin):
     list_display = ('titolo', 'slug', 'inizio', 'fine')
     prepopulated_fields = {"slug": ("titolo",)}
 
 @admin.register(Quesito)
-class QuesitoAdmin(OrderedModelAdmin):
+class QuesitoAdmin(OrderedModelAdmin, TabbedTranslationAdmin):
     list_display = ('get_slug_questionario', 'titolo', 'tipo', 'opzioni', 'move_up_down_links')
     list_filter = ('questionario__slug',)
     

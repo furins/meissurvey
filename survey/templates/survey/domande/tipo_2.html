@@ -40,21 +40,8 @@ di gradimento #} {% block domanda %}
   let domanda_attuale = {{ quesito.order }};
   let domande_totali = {{manager.get_max_order}};
   function submit_value(value){
-    if (domanda_attuale === domande_totali) {
-      document.getElementById('domanda').classList.add('hidden');
-      document.getElementById('messaggio').classList.remove('hidden');
-      setTimeout(
-        function(){
-            document.getElementById('risposta').value = value;
-            document.getElementById("ratingform").submit();
-          },2000);
-    } else {
       document.getElementById('risposta').value = value;
       document.getElementById("ratingform").submit();
-    }
-
-
-
   }
 </script>
 <style>

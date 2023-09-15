@@ -1,7 +1,20 @@
 import json
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.utils.timezone import now
 from survey.models import Quesito, Questionario, Risposta
+
+def intro(request):
+    return render(request, 'survey/intro.html', context={})
+
+def conclusione(request):
+    return render(request, 'survey/fine.html', context={})
+
+def iscrizione(request):
+    return render(request, 'survey/newsletter.html', context={})
+
+def ringraziamento_iscrizione(request):
+    return render(request, 'survey/success.html', context={})
 
 def questionario(request, slug_questionario):
     try:
@@ -28,8 +41,8 @@ def questionario(request, slug_questionario):
             quesito = quesito.next() # passo al successivo
             
             if quesito is None:
-                quesito = q.quesito_set.first() # Si ricomincia
-                
+                return redirect(reverse('conclusione'))
+
         return render(
             request, 
             'survey/questionario.html', 

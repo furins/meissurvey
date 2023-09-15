@@ -1,4 +1,6 @@
-.env
-.python-version
-static
-meissurvey.db
+/.env
+/.python-version
+/static
+/meissurvey.db
+__pycache__
+/dev_database.db
