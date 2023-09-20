@@ -1,18 +1,28 @@
 {% extends 'base.html' %}
+{% load static i18n %}
 {% block contenuti %}
+<div class="text-5xl font-mono mt-14">{% blocktranslate %}Iscriviti alla newsletter{% endblocktranslate %}</div>
 <div class="py-8">
-<h1 class="text-5xl font-mono mt-2 mb-2">Iscriviti alla newsletter</h1>
-<p class="text-2xl font-mono mt-12">
-Per iscriverti, inserisci qui la tua email:
-<br class="mb-12" />
-<input type="email" name="email" value="" class="w-6/12" />
-<br class="mb-12" />
-<a href="{% url 'iscrizione' %}" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-Iscriviti
-</a> &nbsp;
-<a href="{% url 'intro' %}" class="bg-gray-500 hover:bg-gray-400 text-white font-bold py-2 px-4 border-b-4 border-gray-700 hover:border-gray-500 rounded">
-Torna all'inizio
-</a>
-</p>
+  <p class="text-2xl font-mono mt-12 mt-10">
+    {% blocktranslate %}Per iscriverti, inserisci qui la tua email:{% endblocktranslate %}<br class="mb-12" />
+      <input type="email" name="email" value="" class="w-6/12 mb-14 font-mono" />
+      <div class="flex flex-row gap-4 mt-8">
+        <input type="button" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded font-mono" value="{% blocktranslate %}Iscriviti{% endblocktranslate %}" onclick="postData();" />
+        <a href="{% url 'intro' %}" class="bg-gray-500 hover:bg-gray-400 text-white font-bold py-2 px-4 border-b-4 border-gray-700 hover:border-gray-500 rounded font-mono">
+          Torna all'inizio
+        </a>
+      </div>
+  </p>
 </div>
+<script>
+ function postData () {
+fetch("https://i7a2c.mailupclient.com/frontend/xmlSubscribe.aspx?List=1&Group=29,132&Campo30=totem&Email="+document.getElementsByName('email')[0].value+"&Campo32=True&retCode=1", {
+          method: "GET"
+      }).then(function(response){
+          response.text().then(function (s){
+              console.log(s);
+          })
+      })
+  }
+</script>
 {% endblock contenuti %}

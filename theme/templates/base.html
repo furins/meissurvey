@@ -21,37 +21,23 @@
         <div class="grow"></div>
         <div class="flex-none w-50">
           <h1 class="text-xl font-mono">{{questionario.titolo}}</h1>
-         <div id="language">
-          {% for language in languages %}
+          <div id="language">
+            {% for language in languages %}
             {% if language.code != CURRENT_LANGUAGE %}
-              <ul>
-                <li>
-                   <a href="/{{ language.code }}/{{request.get_full_path|slice:"4:"}}" class="border-2 border-blue-500 py-4 px-8 rounded-full font-mono text-l hover:bg-blue-500 hover:text-white">
-                    {{ language.name }}
-                   </a>
-                </li>
-              </ul>
+            <ul>
+              <li>
+                <a href="/{{ language.code }}/{{request.get_full_path|slice:"4:"}}" class="border-2 border-blue-500 py-4 px-8 rounded-full font-mono text-l hover:bg-blue-500 hover:text-white">
+                  {{ language.name }}
+                </a>
+              </li>
+            </ul>
             {% endif %}
-          {% endfor %}
-    </div>
+            {% endfor %}
+          </div>
         </div>
       </div>
 
       {% block contenuti %}
-      <h1 class="text-5xl font-mono mt-2 mb-2">Grazie per la tua visita!</h1>
-      <div class="py-8 flex flex-row gap-4 w-full">
-        <div class="flex flex-row place-content-center">
-         <a href="{% url 'iscrizione' %}" class="bg-gray-200 hover:bg-gray-300 text-black font-bold py-4 px-4 border-b-4 border-gray-300 hover:border-gray-200 rounded flex flex-row font-mono">
-           <img src="{% static 'img/newsletter.svg' %}" alt="Newsletter" class="w-[15vw]"  />Rimani in contatto
-         </a>
-        </div>
-
-        <div class="flex flex-row content-center ">
-         <a href="{% url 'home' %}" class="bg-gray-200 hover:bg-gray-300 text-black font-bold py-4 px-4 border-b-4 border-gray-300 hover:border-gray-200 rounded flex flex-row font-mono">
-           <img src="{% static 'img/rating.svg' %}" alt="Newsletter" class="w-[15vw]"  />Aiutaci a migliorare
-         </a>
-        </div>
-      </div>
       {% endblock contenuti %}
     </div>
   </body>

@@ -1,7 +1,20 @@
 {% extends 'base.html' %}
-{}
-<h1>Aiutaci a migliorare!</h1>
-<p>
-<a href="#">Iscriviti alla Newsletter</a>
-<a href="#">Come è stata la tua visita?</a>
-</p>
+{% load static i18n %}
+{% block contenuti %}
+<div class="text-5xl font-mono mt-14">{% blocktranslate %}Grazie per la tua visita!{% endblocktranslate %}</div>
+<div class="py-8 flex flex-row gap-4 w-full mt-10">
+  <div class="grow">
+    <a href="{% url 'iscrizione' %}" class="bg-gray-200 hover:bg-gray-300 text-black font-bold py-4 px-4 border-b-4 border-gray-300 hover:border-gray-200 rounded flex flex-row flex-1">
+      <img src="{% static 'img/newsletter.svg' %}" alt="Newsletter" class="w-[15vw]"  />
+      <span class="grow flex items-center justify-center text-xl font-mono">{% blocktranslate %}Rimani in contatto{% endblocktranslate %}</span>
+    </a>
+  </div>
+
+  <div class="grow">
+    <a href="{% url 'home' %}" class="bg-gray-200 hover:bg-gray-300 text-black font-bold py-4 px-4 border-b-4 border-gray-300 hover:border-gray-200 rounded flex flex-row flex-1">
+      <img src="{% static 'img/rating.svg' %}" alt="Newsletter" class="w-[15vw]"  />
+      <span class="grow flex items-center justify-center text-xl font-mono">{% blocktranslate %}Aiutaci a migliorare{% endblocktranslate %}</span>
+    </a>
+  </div>
+</div>
+{% endblock contenuti %}
